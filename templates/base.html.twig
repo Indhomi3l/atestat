@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="icon" href="{{ asset('build/images/fav_icon.svg') }}">
+    {{ encore_entry_link_tags('app') }}
+    {{ encore_entry_link_tags('main') }}
+    {% block stylesheets %}
+    {% endblock %}
+</head>
+{% block page_content %}{% endblock %}
+{% block utf_content %}
+{% endblock %}
+{{ encore_entry_script_tags('app') }}
+{{ encore_entry_script_tags('main') }}
+{% block javascripts %}
+{% endblock %}
+</html>

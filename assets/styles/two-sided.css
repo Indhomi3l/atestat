@@ -1,0 +1,11 @@
+.at-header img {
+    max-height: 45px;
+}
+
+.main-image img {
+    display: block;
+    object-fit: cover;
+    width: auto;
+    height: auto;
+    min-height: 100vh;
+}

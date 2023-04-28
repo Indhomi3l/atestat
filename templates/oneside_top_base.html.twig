@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+{% block page_content %}
+    <body>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-7">
+                    <div class="container at-header">
+                        <div class="row">
+                            <div class="col-12 col-md-3">
+                                <img src="{{ asset('build/images/logo.svg') }}"/>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <nav>
+                                    <div class="container-fluid">
+                                        <div class="row row-cols-3 lh-45 main-menu">
+                                            <div class="col">
+                                                <a
+                                                        href="{{ path('app_index_home') }}"
+                                                        class="{% if active=='home' %}active{% endif %}"
+                                                >
+                                                    Home
+                                                </a>
+                                            </div>
+                                            <div class="col">
+                                                <a
+                                                        href="{{ path('app_index_discover') }}"
+                                                        class="{% if active=='discover' %}active{% endif %}"
+                                                >
+                                                    Discover
+                                                </a>
+                                            </div>
+                                            <div class="col">
+                                                <a
+                                                        href="{{ path('app_index_about') }}"
+                                                        class="{% if active=='about' %}active{% endif %}"
+                                                >
+                                                    About
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <nav>
+                    </nav>
+                </div>
+                <div class="col-12 col-md-5">
+                </div>
+            </div>
+        </div>
+    </header>
+    {% block body %}{% endblock %}
+    {% block footer %} {% endblock %}
+    </body>
+{% endblock %}

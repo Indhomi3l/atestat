@@ -1,0 +1,11 @@
+.otf-btn {
+    margin-top: 20vh;
+}
+.otf-btn button {
+    background: #040605;
+    border: 1px solid white;
+    color:white;
+    padding: 15px 35px;
+}
+
+

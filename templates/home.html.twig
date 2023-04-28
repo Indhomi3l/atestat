@@ -1,0 +1,64 @@
+{% extends 'twosides_top.base.html.twig' %}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('two-sided') }}
+    {{ encore_entry_link_tags('home') }}
+{% endblock %}
+{% block otf_content %}
+    <div class="container-fluid px-0 otf-body">
+        <div class="row mx-0 px-0 subtitle mt-subtitle">
+            <div class="col px-0">
+                <span>
+                    Discover the stories behind the songs that defined music.
+                </span>
+            </div>
+        </div>
+        <div class="row mx-0 px-0 content mt-content">
+            <div class="col px-0">
+                <span>
+                    Welcome to Groovy, your ultimate destination for reliving the magic of the greatest musical era in history. Our website is dedicated to showcasing the best and most iconic songs from the 60s, 70s, and 80s, and providing you with the historical and cultural significance of each masterpiece.
+                </span>
+            </div>
+        </div>
+        <div class="row mx-0 px-0 otf-btn">
+            <div class="col px-0">
+                <span>
+                    <button onclick="goToAnchor('topSongs')">Discover</button>
+                </span>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div id="topSongs" class="col subtitle mt">
+                <span>Top songs</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col content mt-content">
+                <span>
+                    Our extensive collection features songs from legendary artists such as Pink Floyd, Led Zeppelin, The Doors, Fleetwood Mac, Jimi Hendrix, and many more. Each song is accompanied by a detailed analysis of its meaning, history, and impact on the music industry and society as a whole.
+                </span>
+            </div>
+        </div>
+        <div class="row mt-subtitle">
+            <div class="container-fluid">
+                {% for song in songs %}
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        function goToAnchor(anchor) {
+            let loc = document.location.toString().split('#')[0];
+            document.location = loc + '#' + anchor;
+            return false;
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,65 @@
+.at-header {
+    margin-top: 65px;
+    height: 100%;
+}
+
+.lh-45 {
+    line-height: 45px;
+}
+
+.main-menu {
+}
+
+.main-menu a {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.main-menu a.active {
+    color: #78957E
+}
+
+.main-menu a:hover {
+    color: #E29F28;
+}
+
+.h-100 {
+    height: 100%;
+}
+
+.subtitle {
+    font-family: 'Raleway', sans-serif;
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 60px;
+    color: white;
+}
+
+.mt-subtitle span {
+    margin-top: 20vh;
+}
+
+.subtitle span {
+    width: 80%;
+    display: block;
+}
+
+
+.content {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #FFFFFF ;
+}
+
+.mt-content span {
+    margin-top: 12px;
+}
+
+.content span {
+    opacity: 65%;
+}
