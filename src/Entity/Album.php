@@ -24,7 +24,7 @@ class Album
     #[Assert\Url()]
     private ?string $spotifyUrl;
 
-    #[ORM\Column(type: Types::STRING)]
+    #[ORM\Column(type: Types::STRING, unique: true)]
     private string $spotifyId;
 
 
@@ -41,9 +41,6 @@ class Album
     #[ORM\Column(type: Types::STRING)]
     private string $spotifyApiUri;
 
-    #[ORM\Column(type: Types::STRING)]
-    private string $label;
-
     #[ORM\ManyToMany(targetEntity: Genre::class, mappedBy: 'albums')]
     private Collection $genres;
 
@@ -55,6 +52,7 @@ class Album
 
     public function __construct()
     {
+        $this->images = new ArrayCollection();
         $this->artists = new ArrayCollection();
         $this->tracks = new ArrayCollection();
         $this->genres = new ArrayCollection();
@@ -195,24 +193,6 @@ class Album
     }
 
     /**
-     * @return string
-     */
-    public function getLabel(): string
-    {
-        return $this->label;
-    }
-
-    /**
-     * @param string $label
-     * @return Album
-     */
-    public function setLabel(string $label): static
-    {
-        $this->label = $label;
-        return $this;
-    }
-
-    /**
      * @return Collection
      */
     public function getGenres(): Collection
@@ -307,5 +287,9 @@ class Album
             $artist->removeAlbum($this);
         }
         return $this;
+    }
+
+    public function __toString(): string {
+        return $this->getName();
     }
 }

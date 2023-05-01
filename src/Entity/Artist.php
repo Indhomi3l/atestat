@@ -20,6 +20,10 @@ class Artist
     #[Assert\Url()]
     private ?string $spotifyUrl;
 
+    #[ORM\Column(type: Types::STRING, nullable: true, unique: true)]
+    #[Assert\Url()]
+    private ?string $spotifyId;
+
     #[ORM\Column(type: Types::STRING)]
     private string $name;
 
@@ -188,5 +192,27 @@ class Artist
             $song->removeArtist($this);
         }
         return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSpotifyId(): ?string
+    {
+        return $this->spotifyId;
+    }
+
+    /**
+     * @param string|null $spotifyId
+     * @return Artist
+     */
+    public function setSpotifyId(?string $spotifyId): Artist
+    {
+        $this->spotifyId = $spotifyId;
+        return $this;
+    }
+
+    public function __toString(): string {
+        return $this->getName();
     }
 }

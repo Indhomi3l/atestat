@@ -14,7 +14,7 @@ class Song
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: Types::BIGINT)]
-    private int $id;
+    private ?int $id=null;
 
     #[ORM\ManyToOne(targetEntity: Album::class, inversedBy: 'tracks')]
     #[ORM\JoinColumn(name: 'album_id', referencedColumnName: 'id')]
@@ -50,9 +50,9 @@ class Song
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -236,5 +236,9 @@ class Song
     {
         $this->lyrics = $lyrics;
         return $this;
+    }
+
+    public function __toString(): string {
+        return $this->getName();
     }
 }

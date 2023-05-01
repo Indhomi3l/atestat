@@ -1,0 +1,30 @@
+{% extends '@!EasyAdmin/page/content.html.twig' %}
+{% block main %}
+    {{ form_start(form) }}
+    <div class="my-custom-class-for-errors">
+        {{ form_errors(form) }}
+    </div>
+
+    <div class="row">
+        <div class="col-3 field-text form-group" id="name">
+            {{ form_label(form.name, null, {'attr': {'class': 'form-control-label required'}}) }}
+            <div class="form-widget">
+                {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3 field-text form-group" id="name">
+            {{ form_label(form.artist, null, {'attr': {'class': 'form-control-label required'}}) }}
+            <div class="form-widget">
+                {{ form_widget(form.artist, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3 field-text form-group">
+            {{ form_row(form.submit, { 'label': 'search', 'attr': {'class': 'btn btn-primary mx-0'}}) }}
+        </div>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

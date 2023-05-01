@@ -46,7 +46,8 @@
         <div class="row mt-subtitle">
             <div class="container-fluid">
                 {% for song in songs %}
-
+                    {% embed 'songPanel.html.twig'%}
+                    {%  endembed %}
                 {% endfor %}
             </div>
         </div>

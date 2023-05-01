@@ -1,0 +1,89 @@
+{% extends '@!EasyAdmin/page/content.html.twig' %}
+{% block page_title %}
+    Search song on spotify
+{% endblock %}
+{% block body_javascript %}
+    <script type="text/javascript">
+        function selectOption(event) {
+            event.preventDefault();
+            let songName = document.getElementById('form_songName').value;
+            let artistName = document.getElementById('form_artistName').value;
+            let selectedOption = document.getElementById('form_selectedSong').value
+            console.log(songName, artistName, selectedOption);
+            fetch('{{ path('app_save_song') }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: songName,
+                    artist: artistName,
+                    selection: selectedOption
+                })
+            }).then(response => {
+                if (response.status === 201) {
+                    window.open("{{path('admin') }}", '_self')
+                }
+                throw new Error(response.status);
+            });
+        }
+    </script>
+{% endblock %}
+{% block main %}
+    {{ form_start(form) }}
+    <div class="my-custom-class-for-errors">
+        {{ form_errors(form) }}
+    </div>
+
+    <div class="row">
+        <div class="col-3 field-text form-group" id="name">
+            {{ form_label(form.songName, null, {'attr': {'class': 'form-control-label required'}}) }}
+            <div class="form-widget">
+                {{ form_widget(form.songName, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3 field-text form-group" id="artist">
+            {{ form_label(form.artistName, null, {'attr': {'class': 'form-control-label required'}}) }}
+            <div class="form-widget">
+                {{ form_widget(form.artistName, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3 field-text form-group">
+            {{ form_row(form.search, { 'attr': {'class': 'btn btn-primary mx-0'}}) }}
+        </div>
+    </div>
+    {% if hasSelection %}
+        <div class="row">
+            <div class="col-10 field-text form-group" id="options">
+                <label for="{{ form.selectedSong.vars.id }}">
+                    Select your desired choice
+                </label>
+                <div class="form-widget">
+                    <select id="{{ form.selectedSong.vars.id }}" name="{{ form.selectedSong.vars.name }}"
+                            data-ea-widget="ea-autocomplete" data-ea-i18n-no-results-found="No results found"
+                            data-ea-i18n-no-more-results="No more results"
+                            data-ea-i18n-loading-more-results="Loading more results…">
+                        {% for choice, value in items %}
+                            <option value="{{ value }}">
+                                {{ choice }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3 field-text form-group">
+                <button class="btn btn-success" onclick="selectOption(event)">
+                    Import
+                </button>
+            </div>
+        </div>
+    {% endif %}
+    {{ form_widget(form._token) }}
+    {{ form_end(form, {'render_rest': false}) }}
+{% endblock %}
