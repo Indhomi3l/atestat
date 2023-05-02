@@ -9,7 +9,7 @@ use Exception;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\PasswordHasherInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Security;
@@ -29,7 +29,7 @@ class GroovyAuthenticator extends AbstractLoginFormAuthenticator
 
     public function __construct(
         private readonly UrlGeneratorInterface $urlGenerator,
-        private readonly PasswordHasherInterface $passwordHasher,
+        private readonly UserPasswordHasherInterface $passwordHasher,
         private readonly UserRepository $userRepository,
         private readonly EntityManagerInterface $_em,
         private readonly Authenticator $authenticator
@@ -52,7 +52,7 @@ class GroovyAuthenticator extends AbstractLoginFormAuthenticator
                 ->setUsername($email)
                 ->setRoles(['ROLE_USER']);
             $plainPassword = $this->generatePassword();
-            $hashedPassword = $this->passwordHasher->hash($plainPassword);
+            $hashedPassword = $this->passwordHasher->hashPassword($user,$plainPassword);
             $user->setPassword($hashedPassword);
             $this->_em->persist($user);
             $this->_em->flush();
