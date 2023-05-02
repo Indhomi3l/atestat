@@ -26,8 +26,7 @@ class IndexController extends AbstractController
         private readonly CacheInterface $cache,
         private readonly ArtistService $artistService,
         private readonly AlbumService $albumService,
-        private readonly SongService $songService,
-        private readonly Session $session,
+        private readonly SongService $songService
     ) {
     }
 
@@ -110,33 +109,6 @@ class IndexController extends AbstractController
             return $result->tracks->items;
         });
         return $items[$data['selection']];
-    }
-
-    #[Route(path: '/spotify/callback', name: 'app_index_callback_from_spotify')]
-    public function callbackFromSpotify(Request $request): Response
-    {
-        try {
-            $this->session->requestAccessToken($request->query->get('code'));
-        } catch (Throwable) {
-            return $this->redirectToRoute('app_index_redirect_to_spotify');
-        }
-
-        $this->spotifyWebAPI->setAccessToken($this->session->getAccessToken());
-        $me = $this->spotifyWebAPI->me();
-
-        return new Response(var_export($me, true), 200, ['Content-Type' => 'text/plain']);
-    }
-
-    #[Route(path: '/spotify/redirect', name: 'app_index_redirect_to_spotify')]
-    public function redirectToSpotify(): Response
-    {
-        $options = [
-            'scope' => [
-                'user-read-email',
-            ],
-        ];
-
-        return $this->redirect($this->session->getAuthorizeUrl($options));
     }
 
 }
