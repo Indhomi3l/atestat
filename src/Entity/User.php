@@ -19,6 +19,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180, unique: true)]
     private ?string $username = null;
 
+    #[ORM\Column(length: 180, unique: true)]
+    private ?string $spotifyId = null;
+
     #[ORM\Column]
     private array $roles = [];
 
@@ -86,6 +89,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->password = $password;
 
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSpotifyId(): ?string
+    {
+        return $this->spotifyId;
+    }
+
+    /**
+     * @param string|null $spotifyId
+     * @return User
+     */
+    public function setSpotifyId(?string $spotifyId): User
+    {
+        $this->spotifyId = $spotifyId;
         return $this;
     }
 

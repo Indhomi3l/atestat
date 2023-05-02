@@ -2,9 +2,14 @@
 
 namespace App\Security;
 
+use App\Entity\User;
+use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\PasswordHasherInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Security;
@@ -14,6 +19,7 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
+use Symfony\Bundle\SecurityBundle\Security as Authenticator;
 
 class GroovyAuthenticator extends AbstractLoginFormAuthenticator
 {
@@ -21,8 +27,37 @@ class GroovyAuthenticator extends AbstractLoginFormAuthenticator
 
     public const LOGIN_ROUTE = 'app_login';
 
-    public function __construct(private UrlGeneratorInterface $urlGenerator)
+    public function __construct(
+        private readonly UrlGeneratorInterface $urlGenerator,
+        private readonly PasswordHasherInterface $passwordHasher,
+        private readonly UserRepository $userRepository,
+        private readonly EntityManagerInterface $_em,
+        private readonly Authenticator $authenticator
+    )
     {
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function authenticateWithSpotify(array|object $me): void
+    {
+        $email = $me->email;
+        $spotifyId = $me->id;
+
+        $user = $this->userRepository->findOneBy(['spotifyId'=>$spotifyId]);
+        if (!$user) {
+            $user = (new User())
+                ->setSpotifyId($spotifyId)
+                ->setUsername($email)
+                ->setRoles(['ROLE_USER']);
+            $plainPassword = $this->generatePassword();
+            $hashedPassword = $this->passwordHasher->hash($plainPassword);
+            $user->setPassword($hashedPassword);
+            $this->_em->persist($user);
+            $this->_em->flush();
+        }
+        $this->authenticator->login($user);
     }
 
     public function authenticate(Request $request): Passport
@@ -40,6 +75,8 @@ class GroovyAuthenticator extends AbstractLoginFormAuthenticator
         );
     }
 
+
+
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
@@ -48,11 +85,26 @@ class GroovyAuthenticator extends AbstractLoginFormAuthenticator
 
         // For example:
         // return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        throw new Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
     protected function getLoginUrl(Request $request): string
     {
         return $this->urlGenerator->generate(self::LOGIN_ROUTE);
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function generatePassword(): string
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!-.[]?*()';
+        $password = '';
+        $characterListLength = mb_strlen($characters, '8bit') - 1;
+        for($i=1; $i<=16; $i++){
+            $password .= $characters[random_int(0, $characterListLength)];
+            $characters = str_shuffle($characters);
+        }
+        return $password;
     }
 }

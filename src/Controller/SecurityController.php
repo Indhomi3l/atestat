@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Security\GroovyAuthenticator;
 use SpotifyWebAPI\Session;
 use SpotifyWebAPI\SpotifyWebAPI;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,6 +16,7 @@ class SecurityController extends AbstractController
     public function __construct(
         private readonly SpotifyWebAPI $spotifyWebAPI,
         private readonly Session $session,
+        private readonly GroovyAuthenticator $authenticator
     ){}
 
     #[Route(path: '/login', name: 'app_login')]
@@ -31,6 +33,9 @@ class SecurityController extends AbstractController
         throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
+    /**
+     * @throws \Exception
+     */
     #[Route(path: '/spotify/redirect', name: 'app_index_redirect_from_spotify')]
     public function callbackFromSpotify(Request $request): Response
     {
@@ -42,8 +47,8 @@ class SecurityController extends AbstractController
 
         $this->spotifyWebAPI->setAccessToken($this->session->getAccessToken());
         $me = $this->spotifyWebAPI->me();
-
-        return new Response(var_export($me, true), 200, ['Content-Type' => 'text/plain']);
+        $this->authenticator->authenticateWithSpotify($me);
+        return $this->redirectToRoute('app_index_home');
     }
 
     #[Route(path: '/spotify/authorize', name: 'app_index_authorize_with_spotify')]
