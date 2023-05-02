@@ -15,8 +15,6 @@ class Genre
     #[ORM\Column(type: Types::BIGINT)]
     private int $id;
 
-
-
     #[ORM\Column(type: Types::STRING, unique: true)]
     private string $name;
 
@@ -121,5 +119,9 @@ class Genre
             $album->removeGenre($this);
         }
         return $this;
+    }
+
+    public function __toString(): string {
+        return $this->getName();
     }
 }

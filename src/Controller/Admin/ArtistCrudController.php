@@ -21,8 +21,10 @@ class ArtistCrudController extends AbstractCrudController
         return [
             IdField::new('id')->onlyOnIndex(),
             TextField::new('name'),
-            AssociationField::new('albums'),
-            AssociationField::new('genres'),
+            AssociationField::new('albums')->hideOnForm(),
+            AssociationField::new('genres')->setFormTypeOptions([
+                'by_reference' => false
+            ])->autocomplete(),
             AssociationField::new('songs')->setDisabled(true)->renderAsNativeWidget()
         ];
     }

@@ -1,1 +1,47 @@
 {% extends 'oneside_top_base.html.twig' %}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('discover') }}
+{% endblock %}
+{% block body %}
+    <div class="container discover">
+        <div class="row">
+            <div id="topSongs" class="col subtitle mt">
+                <span>Top songs</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col content mt-content">
+                <span>
+                    Our extensive collection features songs from legendary artists such as Pink Floyd, Led Zeppelin, The Doors, Fleetwood Mac, Jimi Hendrix, and many more. Each song is accompanied by a detailed analysis of its meaning, history, and impact on the music industry and society as a whole.
+                </span>
+            </div>
+        </div>
+        <div class="row mt-subtitle">
+            <div class="container-fluid">
+                {% set rowCheck = 0 %}
+                {% for index, song in songs %}
+                    {% set rowCheck = index % 5 %}
+                    {% if rowCheck == 0 %}
+                        <div class="row">
+                    {% endif %}
+                    {% embed 'songPanel.html.twig' with {'songIndex': song.id}%}
+                        {% block song_image %}
+                            <img src="{{ song.album.images.first.url }}" alt="{{ song.album.name }}">
+                        {% endblock %}
+                        {% block song_title %}
+                            {{ song.name }}
+                        {% endblock %}
+                        {% block song_artist %}
+                            {{ song.artists[0].name }}
+                        {% endblock %}
+                    {% endembed %}
+                    {% if rowCheck == 4 %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                {% if rowCheck < 4 and rowCheck != 0 %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

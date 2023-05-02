@@ -45,21 +45,41 @@
         </div>
         <div class="row mt-subtitle">
             <div class="container-fluid">
-                {% for song in songs %}
-                    {% embed 'songPanel.html.twig'%}
-                    {%  endembed %}
+                {% set rowCheck = 0 %}
+                {% for index, song in songs %}
+                    {% set rowCheck = index % 5 %}
+                    {% if rowCheck == 0 %}
+                        <div class="row">
+                    {% endif %}
+                    {% embed 'songPanel.html.twig' with {'songIndex': song.id}%}
+                        {% block song_image %}
+                            <img src="{{ song.album.images.first.url }}" alt="{{ song.album.name }}">
+                        {% endblock %}
+                        {% block song_title %}
+                            {{ song.name }}
+                        {% endblock %}
+                        {% block song_artist %}
+                            {{ song.artists[0].name }}
+                        {% endblock %}
+                    {% endembed %}
+                    {% if rowCheck == 4 %}
+                        </div>
+                    {% endif %}
                 {% endfor %}
+                {% if rowCheck < 4 and rowCheck != 0 %}
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>
 {% endblock %}
 
-{% block javascripts %}
-    <script type="text/javascript">
-        function goToAnchor(anchor) {
-            let loc = document.location.toString().split('#')[0];
-            document.location = loc + '#' + anchor;
-            return false;
-        }
-    </script>
-{% endblock %}
+        {% block javascripts %}
+            <script type="text/javascript">
+                function goToAnchor(anchor) {
+                    let loc = document.location.toString().split('#')[0];
+                    document.location = loc + '#' + anchor;
+                    return false;
+                }
+            </script>
+        {% endblock %}

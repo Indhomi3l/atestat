@@ -1,0 +1,34 @@
+.song_image {
+    padding: 10px
+}
+
+.song_image img {
+    display: block;
+    width: 100%;
+    margin: auto;
+}
+
+.song_panel {
+    background: #222222;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    display: block;
+    text-decoration: none;
+}
+
+.song_title {
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.song_artist {
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    opacity: 0.6;
+    margin-bottom: 10px;
+}

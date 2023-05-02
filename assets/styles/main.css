@@ -53,7 +53,7 @@
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
-    color: #FFFFFF ;
+    color: #FFFFFF;
 }
 
 .mt-content span {
@@ -62,4 +62,46 @@
 
 .content span {
     opacity: 65%;
+}
+
+.mt-subtitle {
+    margin-top: 40px;
+}
+
+footer {
+    margin-top: 20vh;
+}
+
+.logo {
+    max-height: 45px;
+}
+
+footer .createdBy {
+    margin-top: 60px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 36px;
+    color: white;
+}
+
+footer .reasoning {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: white;
+    opacity: 65%;
+}
+
+footer .links a {
+    display: block;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: white;
+    text-decoration: none;
+    padding-bottom: 20px;
+    padding-top:20px;
 }

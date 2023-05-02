@@ -16,11 +16,11 @@ class Song
     #[ORM\Column(type: Types::BIGINT)]
     private ?int $id=null;
 
-    #[ORM\ManyToOne(targetEntity: Album::class, inversedBy: 'tracks')]
+    #[ORM\ManyToOne(targetEntity: Album::class, fetch: 'EAGER', inversedBy: 'tracks')]
     #[ORM\JoinColumn(name: 'album_id', referencedColumnName: 'id')]
     private Album $album;
 
-    #[ORM\ManyToMany(targetEntity: Artist::class, inversedBy: 'songs')]
+    #[ORM\ManyToMany(targetEntity: Artist::class, inversedBy: 'songs', fetch: 'EAGER')]
     #[ORM\JoinTable('songs_artists')]
     private Collection $artists;
 
@@ -42,7 +42,7 @@ class Song
     private string $spotifyApiUri;
 
     #[ORM\OneToOne(targetEntity: Lyric::class)]
-    private Lyric $lyrics;
+    private ?Lyric $lyrics = null;
 
 
     public function __construct() {
@@ -221,9 +221,9 @@ class Song
     }
 
     /**
-     * @return Lyric
+     * @return Lyric|null
      */
-    public function getLyrics(): Lyric
+    public function getLyrics(): ?Lyric
     {
         return $this->lyrics;
     }

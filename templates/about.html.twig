@@ -1,1 +1,33 @@
 {% extends 'twosides_top.base.html.twig' %}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('two-sided') }}
+    {{ encore_entry_link_tags('about') }}
+{% endblock %}
+
+{% block otf_content %}
+    <div class="container about">
+        <div class="row">
+            <div class="col-10">
+            <span class="title">
+                About this project
+            </span>
+            </div>
+            <div class="col-10">
+            <span class="detail">
+                <p>
+                    I designed this website about musical masterpieces from the 60's, 70's, and 80's for historical significance and educational purposes for several reasons.
+                </p>
+                <p>
+                    Firstly, the 60's, 70's, and 80's were significant decades in the development of modern popular music. Many iconic artists and genres emerged during this time, and the music produced during this era continues to influence contemporary music. By creating a website that explores the history and evolution of music from these decades, I can help to preserve and celebrate this cultural legacy.
+                </p>
+                <p>
+                    Secondly, the website could be used as an educational resource for other music enthusiasts who want to learn more about this era of music. By providing information about different genres, artists, and albums, the website can help to deepen people's understanding and appreciation of the music from the 60's, 70's, and 80's.
+                </p>
+                <p>
+                    Overall, by creating a website about musical masterpieces from the 60's, 70's, and 80's for historical significance and educational purposes, my goal was to help to foster a deeper understanding and appreciation of this important period in music history.
+                </p>
+            </span>
+            </div>
+        </div>
+    </div>
+{% endblock %}

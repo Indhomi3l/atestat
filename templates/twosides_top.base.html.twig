@@ -1,6 +1,5 @@
 {% extends 'base.html.twig' %}
 {% block page_content %}
-    <body>
     <header>
         <div class="container">
             <div class="row">
@@ -8,7 +7,7 @@
                     <div class="container at-header">
                         <div class="row">
                             <div class="col-12 col-md-3">
-                                <img src="{{ asset('build/images/logo.svg') }}"/>
+                                <img src="{{ asset('build/images/logo.svg') }}" alt="logo"/>
                             </div>
                             <div class="col-12 col-md-9">
                                 <div class="container-fluid">
@@ -61,11 +60,15 @@
                 <div class="col-12 col-md-5 main-image">
                     {% if active=='home' %}
                         <img src="{{ asset('build/images/two_sided_right_cassette.avif') }}"
-                             class="img-fluid float-end"/>
+                             class="img-fluid float-end"
+                             alt="two_sided_right_cassette.avif"
+                        />
                     {% endif %}
                     {% if active=='about' %}
                         <img src="{{ asset('build/images/two_sided_right_woodstock.avif') }}"
-                             class="img-fluid float-end"/>
+                             class="img-fluid float-end"
+                             alt="two_sided_right_woodstock.avif"
+                        />
                     {% endif %}
                 </div>
             </div>
@@ -74,8 +77,4 @@
     <main>
         {% block body %}{% endblock %}
     </main>
-    <footer>
-        {% block footer %} {% endblock %}
-    </footer>
-    </body>
 {% endblock %}

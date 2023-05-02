@@ -20,7 +20,12 @@ class SongService
 
     public function getSongsForHomePage()
     {
-        return $this->repository->getLastFifteenSongs();
+        $songs =  $this->repository->getLastFifteenSongs();
+        $extra = count($songs) %5;
+        if($extra != 0) {
+            array_splice($songs, $extra * -1 );
+        }
+        return $songs;
     }
 
     /**
@@ -47,5 +52,20 @@ class SongService
         $this->_em->persist($song);
         $this->_em->flush();
         return $song;
+    }
+
+    public function getAll(): array
+    {
+        $songs =  $this->repository->findAll();
+        $extra = count($songs) %5;
+        if($extra != 0) {
+            array_splice($songs, $extra * -1 );
+        }
+        return $songs;
+    }
+
+    public function getById(int $id): Song
+    {
+        return $this->repository->find($id);
     }
 }

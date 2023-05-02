@@ -40,11 +40,22 @@ class IndexController extends AbstractController
         ]);
     }
 
+
     #[Route(path: '/discover', name: 'app_index_discover')]
     public function discover(): Response
     {
         return $this->render('discover.html.twig', [
-            'active' => 'discover'
+            'active' => 'discover',
+            'songs' => $this->songService->getAll()
+        ]);
+    }
+
+    #[Route(path: '/song/{id}', name: 'app_index_song')]
+    public function songPage(int $id): Response
+    {
+        return $this->render('singleSong.html.twig', [
+            'active' => null,
+            'song' => $this->songService->getById($id)
         ]);
     }
 

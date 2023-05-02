@@ -1,0 +1,113 @@
+{% extends 'oneside_top_base.html.twig' %}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('single') }}
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row topside">
+            <div class="col-12 col-md-4 image">
+                <img src="{{ asset(song.album.images.first.url) }}" alt="{{ song.album.name }}">
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 songTitle">
+                            {{ song.name }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 artist">
+                            {{ song.artists[0].name }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="container-fluid info">
+                            <div class="row">
+                                <div class="col-12">
+                                    <span class="infoTitle">Album:</span>
+                                </div>
+                                <div class="col-12">
+                                    <span class="infoContent">
+                                        {{ song.album.name }}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <span class="infoTitle">Genre:</span>
+                                </div>
+                                <div class="col-12">
+                                    <span class="infoContent">
+                                        {% if song.album.genres.first.name is defined %}
+                                            {{ song.album.genres.first.name }}
+                                        {% else %}
+                                            not known
+                                        {% endif %}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <span class="infoTitle">Release date:</span>
+                                </div>
+                                <div class="col-12">
+                                    <span class="infoContent">
+                                        {{ song.album.releaseDate }}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-2 position-relative">
+                <a href="#meaning" class="meaningButton">Song's meaning</a>
+            </div>
+        </div>
+        <div class="row lyrics">
+            <div class="col-12">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <span class="title">Lyrics</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <span class="verses">
+                                {% if song.lyrics.content is defined %}
+                                    {{ song.lyrics.content }}
+                                {% else %}
+                                    Lyrics are currently missing
+                                {% endif %}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row meaning" id="meaning">
+            <div class="col-12">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <span class="title">Song's meaning</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <span class="explanation">
+                                {% if song.lyrics.meaning is defined %}
+                                    {{ song.lyrics.meaning }}
+                                {% else %}
+                                    The meaning of these lyrics is lost to mankind. We'll keep searching
+                                {% endif %}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

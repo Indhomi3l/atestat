@@ -1,0 +1,21 @@
+<a class="song_panel col" href="{{ path('app_index_song', {id: songIndex}) }}">
+    <div class="container">
+        <div class="row">
+            <div class="song_image">
+                {% block song_image %}
+                {% endblock %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="song_title">
+                {% block song_title %}
+                {% endblock %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="song_artist">
+                by {% block song_artist %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</a>

@@ -29,7 +29,7 @@ class AlbumService
         if (null !== $existingAlbum) {
             return $existingAlbum;
         }
-
+        dump($album);
         $newAlbum = (new Album())
             ->setName($album->name)
             ->setSpotifyId($album->id)

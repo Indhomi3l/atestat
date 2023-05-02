@@ -1,2 +1,2 @@
-import './styles/home.css'
+import './styles/discover.css'
 import './styles/songPanel.css'

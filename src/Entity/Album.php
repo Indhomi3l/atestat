@@ -41,10 +41,10 @@ class Album
     #[ORM\Column(type: Types::STRING)]
     private string $spotifyApiUri;
 
-    #[ORM\ManyToMany(targetEntity: Genre::class, mappedBy: 'albums')]
+    #[ORM\ManyToMany(targetEntity: Genre::class, mappedBy: 'albums', fetch: 'EAGER')]
     private Collection $genres;
 
-    #[ORM\ManyToMany(targetEntity: Artist::class, mappedBy: 'albums')]
+    #[ORM\ManyToMany(targetEntity: Artist::class, mappedBy: 'albums', fetch: 'EAGER')]
     private Collection $artists;
 
     #[ORM\OneToMany(mappedBy: 'album', targetEntity: Song::class)]

@@ -1,0 +1,20 @@
+.about {
+    margin-top: 18vh;
+}
+
+.title {
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 900;
+    font-size: 40px;
+}
+
+.detail {
+    margin-top: 20px;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    display: block;
+}
