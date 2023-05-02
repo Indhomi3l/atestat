@@ -17,7 +17,7 @@ class UserCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        yield IdField::new('id');
+        yield IdField::new('id')->onlyOnIndex();
         yield Field::new('username');
         yield Field::new('spotifyId');
         yield ArrayField::new('roles');
