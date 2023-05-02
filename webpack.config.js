@@ -12,6 +12,11 @@ Encore
     to: 'images/[path][name].[hash:8].[ext]',
     pattern: /\.(png|jpg|jpeg|avif|webp|svg)$/
   })
+  .copyFiles({
+    from: './assets/files',
+    to: 'files/[path][name].[hash:8].[ext]',
+    pattern: /\.(pdf)$/
+  })
   .addEntry('app', './assets/app.js')
   .addEntry('main', './assets/main.js')
   .addEntry('two-sided', './assets/two-sided.js')
