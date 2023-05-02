@@ -22,3 +22,6 @@ yarn-error.log
 migrations
 ###< symfony/webpack-encore-bundle ###
 .env
+
+.yarn
+.yarnrc.yml
