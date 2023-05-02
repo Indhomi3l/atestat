@@ -43,8 +43,8 @@ class SongCrudController extends AbstractCrudController
             TextField::new('name'),
             AssociationField::new('artists'),
             AssociationField::new('album'),
-            TextEditorField::new('lyrics.content')->onlyOnForms()->setLabel('Lyrics'),
-            TextEditorField::new('lyrics.meaning')->onlyOnForms()->setLabel('Lyrics meaning'),
+            TextEditorField::new('lyrics'),
+            TextEditorField::new('lyricsMeaning'),
         ];
     }
 

@@ -41,8 +41,11 @@ class Song
     #[ORM\Column(type: Types::STRING)]
     private string $spotifyApiUri;
 
-    #[ORM\OneToOne(targetEntity: Lyric::class)]
-    private ?Lyric $lyrics = null;
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $lyrics;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $lyricsMeaning;
 
 
     public function __construct() {
@@ -221,20 +224,38 @@ class Song
     }
 
     /**
-     * @return Lyric|null
+     * @return string|null
      */
-    public function getLyrics(): ?Lyric
+    public function getLyrics(): ?string
     {
         return $this->lyrics;
     }
 
     /**
-     * @param Lyric $lyrics
+     * @param string|null $lyrics
      * @return Song
      */
-    public function setLyrics(Lyric $lyrics): static
+    public function setLyrics(?string $lyrics): Song
     {
         $this->lyrics = $lyrics;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getLyricsMeaning(): ?string
+    {
+        return $this->lyricsMeaning;
+    }
+
+    /**
+     * @param string|null $lyricsMeaning
+     * @return Song
+     */
+    public function setLyricsMeaning(?string $lyricsMeaning): Song
+    {
+        $this->lyricsMeaning = $lyricsMeaning;
         return $this;
     }
 

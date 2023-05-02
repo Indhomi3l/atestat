@@ -13,10 +13,10 @@ class Lyric
     #[ORM\Column(type: Types::BIGINT)]
     private int $id;
 
-    #[ORM\Column(type: Types::TEXT)]
-    private string $content;
-    #[ORM\Column(type: Types::TEXT)]
-    private string $meaning;
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $content=null;
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $meaning=null;
 
     private Song $song;
 
@@ -29,9 +29,9 @@ class Lyric
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getContent(): string
+    public function getContent(): ?string
     {
         return $this->content;
     }
@@ -49,7 +49,7 @@ class Lyric
     /**
      * @return string
      */
-    public function getMeaning(): string
+    public function getMeaning(): ?string
     {
         return $this->meaning;
     }

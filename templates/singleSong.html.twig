@@ -76,8 +76,8 @@
                     <div class="row">
                         <div class="col-12">
                             <span class="verses">
-                                {% if song.lyrics.content is defined %}
-                                    {{ song.lyrics.content }}
+                                {% if song.lyrics is not empty %}
+                                    {{ song.lyrics | raw }}
                                 {% else %}
                                     Lyrics are currently missing
                                 {% endif %}
@@ -98,8 +98,8 @@
                     <div class="row">
                         <div class="col-12">
                             <span class="explanation">
-                                {% if song.lyrics.meaning is defined %}
-                                    {{ song.lyrics.meaning }}
+                                {% if song.lyricsMeaning is not empty %}
+                                    {{ song.lyricsMeaning| raw}}
                                 {% else %}
                                     The meaning of these lyrics is lost to mankind. We'll keep searching
                                 {% endif %}
