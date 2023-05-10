@@ -21,7 +21,7 @@ class Artist
     #[Assert\Url()]
     private ?string $spotifyUrl;
 
-    #[ORM\Column(type: Types::STRING, nullable: true, unique: true)]
+    #[ORM\Column(type: Types::STRING, unique: true, nullable: true)]
     #[Assert\Url()]
     private ?string $spotifyId;
 

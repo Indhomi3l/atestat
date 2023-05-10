@@ -17,11 +17,11 @@ class Song
     #[ORM\Column(type: Types::BIGINT)]
     private ?int $id=null;
 
-    #[ORM\ManyToOne(targetEntity: Album::class, fetch: 'EAGER', inversedBy: 'tracks')]
+    #[ORM\ManyToOne(targetEntity: Album::class, inversedBy: 'tracks')]
     #[ORM\JoinColumn(name: 'album_id', referencedColumnName: 'id')]
     private Album $album;
 
-    #[ORM\ManyToMany(targetEntity: Artist::class, inversedBy: 'songs', fetch: 'EAGER')]
+    #[ORM\ManyToMany(targetEntity: Artist::class, inversedBy: 'songs')]
     #[ORM\JoinTable('songs_artists')]
     private Collection $artists;
 
