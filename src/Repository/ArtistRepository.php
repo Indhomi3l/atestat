@@ -27,6 +27,7 @@ class ArtistRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('ar')
             ->where('ar.spotifyId = :id')
             ->setParameter('id', $id)
+            ->setCacheable(true)
             ->getQuery()
             ->getOneOrNullResult();
     }

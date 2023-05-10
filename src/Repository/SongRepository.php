@@ -24,6 +24,7 @@ class SongRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('s')
             ->setMaxResults(15)
             ->orderBy('s.id', 'DESC')
+            ->setCacheable(true)
             ->getQuery()
             ->getResult();
     }
@@ -35,6 +36,7 @@ class SongRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('s')
             ->where('s.spotifyId = :id')
             ->setParameter('id', $id)
+            ->setCacheable(true)
             ->getQuery()
             ->getOneOrNullResult();
     }

@@ -27,6 +27,7 @@ class AlbumRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('al')
             ->where('al.spotifyId = :id')
             ->setParameter('id', $id)
+            ->setCacheable(true)
             ->getQuery()
             ->getOneOrNullResult();
     }
